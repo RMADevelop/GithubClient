@@ -1,25 +1,29 @@
 package com.example.romanm.githubclient.presentation.ui.activity;
 
-import android.support.v7.app.AppCompatActivity;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.constraint.ConstraintLayout;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 
-import com.example.romanm.githubclient.App;
 import com.example.romanm.githubclient.R;
-import com.example.romanm.githubclient.presentation.mvp.presenter.ReposPresenter;
+import com.example.romanm.githubclient.presentation.ui.fragment.ReposFragment;
+import com.example.romanm.githubclient.utils.ActivityUtils;
 
-import javax.inject.Inject;
+public class MainActivity extends AppCompatActivity{
 
-public class MainActivity extends AppCompatActivity {
-
-    @Inject
-    ReposPresenter reposPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        App.getAppComponent().inject(this);
+        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.main_container);
+        if (fragment == null) {
+            fragment = ReposFragment.newInstance();
+            ActivityUtils.setFragment(getSupportFragmentManager(), fragment, R.id.main_container);
+        }
 
     }
+
 }

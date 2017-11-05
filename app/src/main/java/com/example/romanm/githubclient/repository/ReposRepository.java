@@ -12,7 +12,7 @@ import io.reactivex.Single;
  */
 
 public interface ReposRepository {
-    Single<List<Repos>> getRepos();
+    Single<List<Repos>> loadRepos();
 
-    void saveItem(Item item);
+
 }

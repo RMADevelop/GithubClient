@@ -5,13 +5,14 @@ import com.example.romanm.githubclient.domain.models.Repos;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import io.reactivex.Single;
 
 /**
  * Created by RomanM on 03.11.2017.
  */
-
+@Singleton
 public class Remote implements RemoteSource {
 
     Service service;
@@ -22,7 +23,9 @@ public class Remote implements RemoteSource {
     }
 
     @Override
-    public Single<List<Repos>> getRepos() {
-        return service.getItems(1);
+    public Single<List<Repos>> loadRepos() {
+        return service.getItems();
     }
+
+
 }

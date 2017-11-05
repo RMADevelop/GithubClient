@@ -1,10 +1,10 @@
 package com.example.romanm.githubclient.presentation.ui.fragment;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,20 +14,18 @@ import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.example.romanm.githubclient.App;
 import com.example.romanm.githubclient.R;
-import com.example.romanm.githubclient.presentation.mvp.presenter.ReposPresenter;
+import com.example.romanm.githubclient.domain.models.Repos;
+import com.example.romanm.githubclient.presentation.mvp.presenter.ReposPresenterImpl;
 import com.example.romanm.githubclient.presentation.mvp.view.ReposListView;
 import com.example.romanm.githubclient.presentation.ui.adapter.ReposRecyclerAdapter;
 
+import java.util.Collections;
+import java.util.List;
+
 import javax.inject.Inject;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link ReposFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link ReposFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import static android.content.ContentValues.TAG;
+
 
 public class ReposFragment extends MvpAppCompatFragment implements ReposListView {
 
@@ -36,15 +34,15 @@ public class ReposFragment extends MvpAppCompatFragment implements ReposListView
 
 //    private String mParam1;
 
-    private OnFragmentInteractionListener mListener;
 
-//    @Inject
-//    ReposPresenter presenter;
+    @Inject
+    @InjectPresenter
+    ReposPresenterImpl presenter;
 
-//    @ProvidePresenter
-//    ReposPresenter providePresenter() {
-//        return presenter;
-//    }
+    @ProvidePresenter
+    ReposPresenterImpl providePresenter() {
+        return presenter;
+    }
 
     private RecyclerView reposReccycler;
     private ReposRecyclerAdapter adapter;
@@ -64,6 +62,7 @@ public class ReposFragment extends MvpAppCompatFragment implements ReposListView
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        App.getAppComponent().inject(this);
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
 //            mParam1 = getArguments().getString(ARG_PARAM1);
@@ -74,44 +73,41 @@ public class ReposFragment extends MvpAppCompatFragment implements ReposListView
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_repos, container, false);
-        App.getAppComponent().inject(this);
-
-//        presenter.saveItems();
         initRecyler(view);
         return view;
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        presenter.getRepos();
+
+    }
+
     private void initRecyler(View view) {
         reposReccycler = (RecyclerView) view.findViewById(R.id.recycler_repos);
-        adapter = new ReposRecyclerAdapter();
-    }
-
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
+        adapter = new ReposRecyclerAdapter(Collections.emptyList());
+        reposReccycler.setLayoutManager(new LinearLayoutManager(getContext()));
+        reposReccycler.setAdapter(adapter);
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
+    public void addItemsInAdapter(List<Repos> reposList) {
+        Log.d(TAG, "addItemsInAdapter() called with: reposList = [" + reposList + "]");
+        adapter.setList(reposList);
     }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
+//
+//    @Override
+//    public void onAttach(Context context) {
+//        super.onAttach(context);
+//        if (context instanceof OnFragmentInteractionListener) {
+//            mListener = (OnFragmentInteractionListener) context;
+//        } else {
+//            throw new RuntimeException(context.toString()
+//                    + " must implement OnFragmentInteractionListener");
+//        }
+//    }
 
 
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
 }

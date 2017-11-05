@@ -14,5 +14,5 @@ import io.reactivex.Single;
 
 public interface RemoteSource {
 
-    Single<List<Repos>> getRepos();
+    Single<List<Repos>> loadRepos();
 }

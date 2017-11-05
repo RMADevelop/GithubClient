@@ -1,7 +1,10 @@
 package com.example.romanm.githubclient.domain.interactors;
 
 import com.example.romanm.githubclient.domain.models.Item;
+import com.example.romanm.githubclient.domain.models.Repos;
 import com.example.romanm.githubclient.repository.ReposRepository;
+
+import java.util.List;
 
 import io.reactivex.Single;
 
@@ -11,7 +14,5 @@ import io.reactivex.Single;
 
 public interface ReposInteractor {
 
-    Single<Item> checkDb();
-
-    void saveItem(Item item);
+    Single<List<Repos>> getRepos();
 }

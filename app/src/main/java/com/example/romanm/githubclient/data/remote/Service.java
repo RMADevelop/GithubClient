@@ -15,5 +15,5 @@ import retrofit2.http.Query;
 public interface Service {
 
     @GET("repositories")
-    Single<List<Repos>> getItems(@Query("since") int id);
+    Single<List<Repos>> getItems();
 }

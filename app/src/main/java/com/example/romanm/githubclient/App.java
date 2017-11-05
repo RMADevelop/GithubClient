@@ -2,9 +2,11 @@ package com.example.romanm.githubclient;
 
 import android.app.Application;
 
+import com.example.romanm.githubclient.data.remote.ApiConstantse;
 import com.example.romanm.githubclient.di.component.AppComponent;
 import com.example.romanm.githubclient.di.component.DaggerAppComponent;
 import com.example.romanm.githubclient.di.modules.ContextModule;
+import com.example.romanm.githubclient.di.modules.DataModule;
 
 /**
  * Created by RomanM on 04.11.2017.
@@ -18,7 +20,7 @@ public class App extends Application {
         super.onCreate();
         appComponent = DaggerAppComponent.builder()
                 .contextModule(new ContextModule(this))
-//                .dataModule(new DataModule(ApiConstantse.API_GITHUB))
+                .dataModule(new DataModule(ApiConstantse.API_GITHUB))
                 .build();
     }
 

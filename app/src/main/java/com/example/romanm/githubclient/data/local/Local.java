@@ -8,10 +8,12 @@ import javax.inject.Singleton;
 
 import io.reactivex.Single;
 
+@Singleton
 public class Local implements LocalSource {
 
     LocalRoomDAO dao;
 
+    @Inject
     public Local(LocalRoomDAO dao) {
         this.dao = dao;
     }
