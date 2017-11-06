@@ -7,6 +7,7 @@ import com.arellomobile.mvp.MvpPresenter;
 import com.example.romanm.githubclient.domain.interactors.ReposInteractor;
 import com.example.romanm.githubclient.domain.interactors.ReposInteractorImpl;
 import com.example.romanm.githubclient.domain.models.Repos;
+import com.example.romanm.githubclient.domain.models.ReposLocal;
 import com.example.romanm.githubclient.presentation.mvp.view.ReposListView;
 
 import java.util.List;
@@ -36,9 +37,9 @@ public class ReposPresenterImpl extends MvpPresenter<ReposListView> implements I
         reposInteractor.getRepos()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribeWith(new DisposableSingleObserver<List<Repos>>() {
+                .subscribeWith(new DisposableSingleObserver<List<ReposLocal>>() {
                     @Override
-                    public void onSuccess(List<Repos> repos) {
+                    public void onSuccess(List<ReposLocal> repos) {
                         Log.v("DSDFSDF", repos.size() + " size");
                         getViewState().addItemsInAdapter(repos);
                     }

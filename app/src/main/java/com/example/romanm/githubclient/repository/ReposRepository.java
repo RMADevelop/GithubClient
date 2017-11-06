@@ -1,7 +1,6 @@
 package com.example.romanm.githubclient.repository;
 
-import com.example.romanm.githubclient.domain.models.Item;
-import com.example.romanm.githubclient.domain.models.Repos;
+import com.example.romanm.githubclient.domain.models.ReposLocal;
 
 import java.util.List;
 
@@ -12,7 +11,7 @@ import io.reactivex.Single;
  */
 
 public interface ReposRepository {
-    Single<List<Repos>> loadRepos();
+    Single<List<ReposLocal>> loadRepos();
 
 
 }

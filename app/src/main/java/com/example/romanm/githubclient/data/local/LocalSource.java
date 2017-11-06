@@ -1,7 +1,9 @@
 package com.example.romanm.githubclient.data.local;
 
 import com.example.romanm.githubclient.domain.models.Item;
-import com.example.romanm.githubclient.domain.models.Repos;
+import com.example.romanm.githubclient.domain.models.ReposLocal;
+
+import java.util.List;
 
 import io.reactivex.Single;
 
@@ -11,9 +13,7 @@ import io.reactivex.Single;
 
 public interface LocalSource  {
 
-    Single<Repos> getItems();
+    Single<List<ReposLocal>> getItems();
 
-    Single<Item> checkDb();
-
-    void saveItem(Item item);
+    void saveItem(ReposLocal item);
 }

@@ -1,7 +1,6 @@
 package com.example.romanm.githubclient.domain.interactors;
 
-import com.example.romanm.githubclient.domain.models.Item;
-import com.example.romanm.githubclient.domain.models.Repos;
+import com.example.romanm.githubclient.domain.models.ReposLocal;
 import com.example.romanm.githubclient.repository.ReposRepositoryImpl;
 
 import java.util.List;
@@ -23,7 +22,7 @@ public class ReposInteractorImpl implements ReposInteractor {
     }
 
     @Override
-    public Single<List<Repos>> getRepos() {
+    public Single<List<ReposLocal>> getRepos() {
         return reposRepository.loadRepos();
     }
 }

@@ -15,6 +15,7 @@ import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.example.romanm.githubclient.App;
 import com.example.romanm.githubclient.R;
 import com.example.romanm.githubclient.domain.models.Repos;
+import com.example.romanm.githubclient.domain.models.ReposLocal;
 import com.example.romanm.githubclient.presentation.mvp.presenter.ReposPresenterImpl;
 import com.example.romanm.githubclient.presentation.mvp.view.ReposListView;
 import com.example.romanm.githubclient.presentation.ui.adapter.ReposRecyclerAdapter;
@@ -92,7 +93,7 @@ public class ReposFragment extends MvpAppCompatFragment implements ReposListView
     }
 
     @Override
-    public void addItemsInAdapter(List<Repos> reposList) {
+    public void addItemsInAdapter(List<ReposLocal> reposList) {
         Log.d(TAG, "addItemsInAdapter() called with: reposList = [" + reposList + "]");
         adapter.setList(reposList);
     }

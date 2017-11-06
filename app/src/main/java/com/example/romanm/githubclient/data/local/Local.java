@@ -1,7 +1,9 @@
 package com.example.romanm.githubclient.data.local;
 
 import com.example.romanm.githubclient.domain.models.Item;
-import com.example.romanm.githubclient.domain.models.Repos;
+import com.example.romanm.githubclient.domain.models.ReposLocal;
+
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -20,17 +22,14 @@ public class Local implements LocalSource {
 
 
     @Override
-    public Single<Repos> getItems() {
+    public Single<List<ReposLocal>> getItems() {
         return null;
     }
 
-    @Override
-    public Single<Item> checkDb() {
-        return dao.checkDB();
-    }
+
 
     @Override
-    public void saveItem(Item item) {
+    public void saveItem(ReposLocal item) {
         dao.saveItem(item);
     }
 }

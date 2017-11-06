@@ -5,6 +5,10 @@ import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 
 import com.example.romanm.githubclient.domain.models.Item;
+import com.example.romanm.githubclient.domain.models.Repos;
+import com.example.romanm.githubclient.domain.models.ReposLocal;
+
+import java.util.List;
 
 import io.reactivex.Single;
 
@@ -14,9 +18,11 @@ public interface LocalRoomDAO  {
 
 
     @Insert
-    void saveItem(Item item);
+    void saveItem(ReposLocal repos);
 
-    @Query("SELECT * FROM Item WHERE id LIKE 1")
-    Single<Item> checkDB();
+    @Query("SELECT * FROM ReposLocal LIMIT :start, :limit")
+    Single<List<ReposLocal>> getItems(int start, int limit);
+
+
 }
 //

@@ -2,12 +2,14 @@ package com.example.romanm.githubclient.repository;
 
 import com.example.romanm.githubclient.data.local.Local;
 import com.example.romanm.githubclient.data.remote.Remote;
-import com.example.romanm.githubclient.domain.models.Repos;
+import com.example.romanm.githubclient.domain.models.ReposLocal;
 
 import java.util.List;
 
 import javax.inject.Inject;
 
+import io.reactivex.Maybe;
+import io.reactivex.Observable;
 import io.reactivex.Single;
 
 /**
@@ -26,7 +28,24 @@ public class ReposRepositoryImpl implements ReposRepository {
     }
 
     @Override
-    public Single<List<Repos>> loadRepos() {
-        return remote.loadRepos();
+    public Single<List<ReposLocal>> loadRepos() {
+        Maybe<List<ReposLocal>> localList = local.getItems()
+                .toMaybe();
+
+        Maybe<List<ReposLocal>> remoteList = remote.loadRepos()
+                .flatMapObservable(Observable::fromIterable)
+                .map(repos -> new ReposLocal(repos.getId(),repos.getName()))
+                .doOnNext(reposLocal -> local.saveItem(reposLocal))
+                .toList()
+                .toMaybe();
+
+
+        return Maybe.concat(localList,remoteList)
+                .firstElement()
+                .toSingle();
+
+
+
+//        return remote.loadRepos();
     }
 }

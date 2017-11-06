@@ -1,8 +1,6 @@
 package com.example.romanm.githubclient.domain.interactors;
 
-import com.example.romanm.githubclient.domain.models.Item;
-import com.example.romanm.githubclient.domain.models.Repos;
-import com.example.romanm.githubclient.repository.ReposRepository;
+import com.example.romanm.githubclient.domain.models.ReposLocal;
 
 import java.util.List;
 
@@ -14,5 +12,5 @@ import io.reactivex.Single;
 
 public interface ReposInteractor {
 
-    Single<List<Repos>> getRepos();
+    Single<List<ReposLocal>> getRepos();
 }
