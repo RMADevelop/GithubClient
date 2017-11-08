@@ -1,5 +1,7 @@
 package com.example.romanm.githubclient.data.remote;
 
+import android.util.Log;
+
 import com.example.romanm.githubclient.domain.models.Repos;
 
 import java.util.List;
@@ -7,7 +9,9 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import io.reactivex.Single;
+import io.reactivex.Maybe;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * Created by RomanM on 03.11.2017.
@@ -23,7 +27,8 @@ public class Remote implements RemoteSource {
     }
 
     @Override
-    public Single<List<Repos>> loadRepos() {
+    public Maybe<List<Repos>> loadRepos() {
+        Log.d(TAG, "loadRepos()hhhhhhhhhhhhhhhhhhhhhhhhhhh called");
         return service.getItems();
     }
 

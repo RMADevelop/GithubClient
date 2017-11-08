@@ -4,6 +4,7 @@ import com.example.romanm.githubclient.domain.models.Repos;
 
 import java.util.List;
 
+import io.reactivex.Maybe;
 import io.reactivex.Single;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
@@ -15,5 +16,5 @@ import retrofit2.http.Query;
 public interface Service {
 
     @GET("repositories")
-    Single<List<Repos>> getItems();
+    Maybe<List<Repos>> getItems();
 }

@@ -4,6 +4,7 @@ import com.example.romanm.githubclient.domain.models.ReposLocal;
 
 import java.util.List;
 
+import io.reactivex.Maybe;
 import io.reactivex.Single;
 
 /**
@@ -12,5 +13,7 @@ import io.reactivex.Single;
 
 public interface ReposInteractor {
 
-    Single<List<ReposLocal>> getRepos();
+    Maybe<List<ReposLocal>> getRepos(int start,int limit);
+
+    Single<List<ReposLocal>> getItems(int start, int limit);
 }

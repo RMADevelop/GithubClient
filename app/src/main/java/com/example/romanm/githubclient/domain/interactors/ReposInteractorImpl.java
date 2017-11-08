@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import io.reactivex.Maybe;
 import io.reactivex.Single;
 
 /**
@@ -22,7 +23,13 @@ public class ReposInteractorImpl implements ReposInteractor {
     }
 
     @Override
-    public Single<List<ReposLocal>> getRepos() {
-        return reposRepository.loadRepos();
+    public Maybe<List<ReposLocal>> getRepos(int start,int limit) {
+
+        return reposRepository.loadRepos(start,limit);
+    }
+
+    @Override
+    public Single<List<ReposLocal>> getItems(int start, int limit) {
+        return reposRepository.getItems(start, limit);
     }
 }

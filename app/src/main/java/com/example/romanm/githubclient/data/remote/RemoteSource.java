@@ -4,9 +4,7 @@ import com.example.romanm.githubclient.domain.models.Repos;
 
 import java.util.List;
 
-import javax.inject.Singleton;
-
-import io.reactivex.Single;
+import io.reactivex.Maybe;
 
 /**
  * Created by RomanM on 03.11.2017.
@@ -14,5 +12,5 @@ import io.reactivex.Single;
 
 public interface RemoteSource {
 
-    Single<List<Repos>> loadRepos();
+    Maybe<List<Repos>> loadRepos();
 }
