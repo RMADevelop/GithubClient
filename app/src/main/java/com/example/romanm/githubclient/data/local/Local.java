@@ -2,7 +2,7 @@ package com.example.romanm.githubclient.data.local;
 
 import android.util.Log;
 
-import com.example.romanm.githubclient.domain.models.ReposLocal;
+import com.example.romanm.githubclient.data.local.model.ReposLocal;
 
 import java.util.List;
 
@@ -45,5 +45,10 @@ public class Local implements LocalSource {
     @Override
     public void saveItem(ReposLocal item) {
         dao.saveItem(item);
+    }
+
+    @Override
+    public void saveItems(List<ReposLocal> list) {
+        dao.saveItems(list);
     }
 }

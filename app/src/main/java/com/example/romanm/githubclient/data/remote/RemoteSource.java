@@ -1,6 +1,6 @@
 package com.example.romanm.githubclient.data.remote;
 
-import com.example.romanm.githubclient.domain.models.Repos;
+import com.example.romanm.githubclient.data.remote.model.Repos;
 
 import java.util.List;
 

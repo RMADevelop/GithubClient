@@ -1,4 +1,4 @@
-package com.example.romanm.githubclient.domain.models;
+package com.example.romanm.githubclient.data.local.model;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;

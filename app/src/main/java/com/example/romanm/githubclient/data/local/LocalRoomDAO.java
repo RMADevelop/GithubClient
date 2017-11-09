@@ -4,7 +4,7 @@ import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 
-import com.example.romanm.githubclient.domain.models.ReposLocal;
+import com.example.romanm.githubclient.data.local.model.ReposLocal;
 
 import java.util.List;
 
@@ -19,7 +19,10 @@ public interface LocalRoomDAO {
     @Insert
     void saveItem(ReposLocal repos);
 
-    @Query("SELECT * FROM ReposLocal LIMIT :limit, :start")
+    @Insert
+    void saveItems(List<ReposLocal> list);
+
+    @Query("SELECT * FROM ReposLocal LIMIT :start, :limit")
     Maybe<List<ReposLocal>> getItems(int start, int limit);
 
     @Query("SELECT * FROM ReposLocal WHERE id LIKE :start LIMIT :limit")

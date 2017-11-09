@@ -1,6 +1,6 @@
 package com.example.romanm.githubclient.data.local;
 
-import com.example.romanm.githubclient.domain.models.ReposLocal;
+import com.example.romanm.githubclient.data.local.model.ReposLocal;
 
 import java.util.List;
 
@@ -21,4 +21,6 @@ public interface LocalSource {
 
 
     void saveItem(ReposLocal item);
+
+    void saveItems(List<ReposLocal> list);
 }
