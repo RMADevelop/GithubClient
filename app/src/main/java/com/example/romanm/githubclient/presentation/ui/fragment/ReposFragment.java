@@ -1,10 +1,15 @@
 package com.example.romanm.githubclient.presentation.ui.fragment;
 
+import android.app.ActionBar;
 import android.os.Bundle;
+import android.support.v7.widget.ActionBarContainer;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -35,6 +40,8 @@ public class ReposFragment extends MvpAppCompatFragment implements ReposListView
 //    private String mParam1;
 
 
+
+
     @Inject
     @InjectPresenter
     ReposPresenterImpl presenter;
@@ -46,6 +53,7 @@ public class ReposFragment extends MvpAppCompatFragment implements ReposListView
 
     private RecyclerView reposReccycler;
     private ReposRecyclerAdapter adapter;
+    private Toolbar toolbar;
 
     public ReposFragment() {
         // Required empty public constructor
@@ -73,8 +81,13 @@ public class ReposFragment extends MvpAppCompatFragment implements ReposListView
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_repos, container, false);
+        initToolbar(view);
         initRecyler(view);
         return view;
+    }
+
+    private void initToolbar(View view) {
+        toolbar = view.findViewById(R.id.toolbar);
     }
 
     @Override
@@ -116,6 +129,8 @@ public class ReposFragment extends MvpAppCompatFragment implements ReposListView
 //    }
 
 
-
-
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+    }
 }

@@ -20,7 +20,7 @@ import static com.bumptech.glide.gifdecoder.GifHeaderParser.TAG;
 public class ReposInteractorImpl implements ReposInteractor {
 
     private final int limit = 100;
-    private int cursor;
+    private int cursor = 0;
     private int idLastLoadRepos;
 
     private ReposRepositoryImpl reposRepository;
@@ -33,7 +33,7 @@ public class ReposInteractorImpl implements ReposInteractor {
     @Override
     public Maybe<List<ItemReposDomain>> getRepos() {
 
-        Maybe<List<ItemReposDomain>> reposList = reposRepository.loadRepos(cursor, limit,idLastLoadRepos)
+        Maybe<List<ItemReposDomain>> reposList = reposRepository.loadRepos(cursor, limit, idLastLoadRepos)
                 .doOnSuccess(this::getLastReposId);
 
         cursorNext();

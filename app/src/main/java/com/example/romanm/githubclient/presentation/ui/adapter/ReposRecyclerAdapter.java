@@ -57,7 +57,7 @@ public class ReposRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if (position == getItemCount()-1) {
+        if (position == getItemCount() - 1 && getItemCount() > 1) {
             Log.d(TAG, "LOAD MORE position = [" + position + "]");
             listener.loadMore();
         }

@@ -48,14 +48,20 @@ public class ReposRepositoryImpl implements ReposRepository {
 
         Maybe<List<ReposLocal>> remoteList = remote.loadRepos(idLastLoadRepos)
                 .map(list -> remoteToLocalMapper.transform(list))
-                .doOnSuccess(reposLocals -> local.saveItems(reposLocals));
+                .doOnSuccess(reposLocals -> {
+                    Log.d(TAG, "saveItems " + start);
+                    local.saveItems(reposLocals);
+                });
 
 
         Maybe<List<ReposLocal>> localList = local.getItems(start, limit)
                 .flatMap(list -> {
                     if (list.isEmpty()) {
+                        Log.d(TAG, "LocalList with LISTSIZE " + list.size() + "  called with: start = [" + start + "], limit = [" + limit + "], idLastLoadRepos = [" + idLastLoadRepos + "]");
                         return remoteList;
                     }
+                    Log.d(TAG, "LocalList with LISTSIZE " + list.size() + "  called with: start = [" + start + "], limit = [" + limit + "], idLastLoadRepos = [" + idLastLoadRepos + "]");
+
                     return Maybe.just(list);
                 });
 
