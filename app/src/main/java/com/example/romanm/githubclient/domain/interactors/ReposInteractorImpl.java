@@ -1,5 +1,7 @@
 package com.example.romanm.githubclient.domain.interactors;
 
+import android.util.Log;
+
 import com.example.romanm.githubclient.domain.models.ItemReposDomain;
 import com.example.romanm.githubclient.repository.ReposRepositoryImpl;
 
@@ -9,6 +11,8 @@ import javax.inject.Inject;
 
 import io.reactivex.Maybe;
 import io.reactivex.functions.Consumer;
+
+import static com.bumptech.glide.gifdecoder.GifHeaderParser.TAG;
 
 /**
  * Created by RomanM on 04.11.2017.
@@ -43,6 +47,7 @@ public class ReposInteractorImpl implements ReposInteractor {
 
     private void getLastReposId(List<ItemReposDomain> list) {
         idLastLoadRepos = list.get(list.size() - 1).getIdRepos();
+        Log.d(TAG, "getLastReposId() called with: list = [" + idLastLoadRepos + "]");
     }
 
 }

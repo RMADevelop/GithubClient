@@ -27,7 +27,7 @@ import javax.inject.Inject;
 import static android.content.ContentValues.TAG;
 
 
-public class ReposFragment extends MvpAppCompatFragment implements ReposListView {
+public class ReposFragment extends MvpAppCompatFragment implements ReposListView,ReposRecyclerAdapter.ReposRecyclerListener{
 
 
 //    private static final String ARG_PARAM1 = "param1";
@@ -86,7 +86,7 @@ public class ReposFragment extends MvpAppCompatFragment implements ReposListView
 
     private void initRecyler(View view) {
         reposReccycler = (RecyclerView) view.findViewById(R.id.recycler_repos);
-        adapter = new ReposRecyclerAdapter(Collections.emptyList());
+        adapter = new ReposRecyclerAdapter(Collections.emptyList(),this);
         reposReccycler.setLayoutManager(new LinearLayoutManager(getContext()));
         reposReccycler.setAdapter(adapter);
     }
@@ -95,6 +95,11 @@ public class ReposFragment extends MvpAppCompatFragment implements ReposListView
     public void addItemsInAdapter(List<ItemReposDomain> reposList) {
         Log.d(TAG, "addItemsInAdapter() called with: reposList = [" + reposList + "]");
         adapter.setList(reposList);
+    }
+
+    @Override
+    public void loadMore() {
+        presenter.getRepos();
     }
 
 
@@ -109,6 +114,8 @@ public class ReposFragment extends MvpAppCompatFragment implements ReposListView
 //                    + " must implement OnFragmentInteractionListener");
 //        }
 //    }
+
+
 
 
 }

@@ -25,16 +25,18 @@ public class ReposRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.View
     private final static int TYPE_ITEM = 0;
     private final static int TYPE_FOOTER = 1;
 
+    private ReposRecyclerListener listener;
+
     List<ItemReposDomain> reposList = new ArrayList<>();
 
-    public ReposRecyclerAdapter(List<ItemReposDomain> reposList) {
-        Log.d(TAG, "ReposRecyclerAdapter() called with: reposList = [" + reposList + "]");
+    public ReposRecyclerAdapter(List<ItemReposDomain> reposList, ReposRecyclerListener listener) {
+        this.listener = listener;
         this.reposList.addAll(reposList);
     }
 
     @Override
     public int getItemViewType(int position) {
-        if (position == getItemCount()-1) {
+        if (position == getItemCount() - 1) {
             return TYPE_FOOTER;
         }
         return TYPE_ITEM;
@@ -55,6 +57,10 @@ public class ReposRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        if (position == getItemCount()-1) {
+            Log.d(TAG, "LOAD MORE position = [" + position + "]");
+            listener.loadMore();
+        }
         if (holder instanceof ReposViewHolder) {
             ReposViewHolder holderItem = (ReposViewHolder) holder;
             holderItem.bindTo(reposList.get(position));
@@ -100,5 +106,9 @@ public class ReposRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.View
         public FooterViewHolder(View itemView) {
             super(itemView);
         }
+    }
+
+    public interface ReposRecyclerListener {
+        void loadMore();
     }
 }
