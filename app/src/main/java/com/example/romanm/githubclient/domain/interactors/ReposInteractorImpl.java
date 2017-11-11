@@ -8,13 +8,18 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.reactivex.Maybe;
+import io.reactivex.functions.Consumer;
 
 /**
  * Created by RomanM on 04.11.2017.
  */
 public class ReposInteractorImpl implements ReposInteractor {
 
-    ReposRepositoryImpl reposRepository;
+    private final int limit = 100;
+    private int cursor;
+    private int idLastLoadRepos;
+
+    private ReposRepositoryImpl reposRepository;
 
     @Inject
     public ReposInteractorImpl(ReposRepositoryImpl reposRepository) {
@@ -22,9 +27,22 @@ public class ReposInteractorImpl implements ReposInteractor {
     }
 
     @Override
-    public Maybe<List<ItemReposDomain>> getRepos(int start, int limit) {
+    public Maybe<List<ItemReposDomain>> getRepos() {
 
-        return reposRepository.loadRepos(start,limit);
+        Maybe<List<ItemReposDomain>> reposList = reposRepository.loadRepos(cursor, limit,idLastLoadRepos)
+                .doOnSuccess(this::getLastReposId);
+
+        cursorNext();
+
+        return reposList;
+    }
+
+    private void cursorNext() {
+        cursor += limit;
+    }
+
+    private void getLastReposId(List<ItemReposDomain> list) {
+        idLastLoadRepos = list.get(list.size() - 1).getIdRepos();
     }
 
 }

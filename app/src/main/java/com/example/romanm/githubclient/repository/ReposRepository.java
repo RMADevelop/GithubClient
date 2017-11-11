@@ -13,6 +13,6 @@ import io.reactivex.Single;
  */
 
 public interface ReposRepository {
-    Maybe<List<ItemReposDomain>> loadRepos(int start, int limit);
+    Maybe<List<ItemReposDomain>> loadRepos(int start, int limit,int idLastLoadRepos);
 
 }

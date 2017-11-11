@@ -12,5 +12,5 @@ import io.reactivex.Maybe;
 
 public interface ReposInteractor {
 
-    Maybe<List<ItemReposDomain>> getRepos(int start, int limit);
+    Maybe<List<ItemReposDomain>> getRepos();
 }

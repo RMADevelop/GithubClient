@@ -12,5 +12,5 @@ import io.reactivex.Maybe;
 
 public interface RemoteSource {
 
-    Maybe<List<Repos>> loadRepos();
+    Maybe<List<Repos>> loadRepos(int idLastLoadRepos);
 }

@@ -80,7 +80,7 @@ public class ReposFragment extends MvpAppCompatFragment implements ReposListView
     @Override
     public void onStart() {
         super.onStart();
-        presenter.getRepos(0,100);
+        presenter.getRepos();
 
     }
 

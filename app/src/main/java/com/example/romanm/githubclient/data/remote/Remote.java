@@ -27,9 +27,9 @@ public class Remote implements RemoteSource {
     }
 
     @Override
-    public Maybe<List<Repos>> loadRepos() {
-        Log.d(TAG, "loadRepos()hhhhhhhhhhhhhhhhhhhhhhhhhhh called");
-        return service.getItems();
+    public Maybe<List<Repos>> loadRepos(int idLastLoadRepos) {
+
+        return service.getItems(idLastLoadRepos);
     }
 
 

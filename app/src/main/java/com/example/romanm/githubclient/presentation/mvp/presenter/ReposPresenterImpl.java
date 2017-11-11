@@ -30,8 +30,8 @@ public class ReposPresenterImpl extends MvpPresenter<ReposListView> implements R
 
 
     @Override
-    public void getRepos(int start, int limit) {
-        reposInteractor.getRepos(start, limit)
+    public void getRepos() {
+        reposInteractor.getRepos()
                 .toSingle()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

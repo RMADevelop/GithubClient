@@ -6,5 +6,5 @@ package com.example.romanm.githubclient.presentation.mvp.presenter;
 
 public interface ReposPresenter {
 
-    void getRepos(int start,int limit);
+    void getRepos();
 }

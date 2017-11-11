@@ -44,9 +44,9 @@ public class ReposRepositoryImpl implements ReposRepository {
 
 
     @Override
-    public Maybe<List<ItemReposDomain>> loadRepos(int start, int limit) {
+    public Maybe<List<ItemReposDomain>> loadRepos(int start, int limit, int idLastLoadRepos) {
 
-        Maybe<List<ReposLocal>> remoteList = remote.loadRepos()
+        Maybe<List<ReposLocal>> remoteList = remote.loadRepos(idLastLoadRepos)
                 .map(list -> remoteToLocalMapper.transform(list))
                 .doOnSuccess(reposLocals -> local.saveItems(reposLocals));
 

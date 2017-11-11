@@ -20,9 +20,12 @@ import static android.content.ContentValues.TAG;
  * Created by RomanM on 03.11.2017.
  */
 
-public class ReposRecyclerAdapter extends RecyclerView.Adapter<ReposRecyclerAdapter.ReposViewHolder> {
+public class ReposRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-     List<ItemReposDomain> reposList = new ArrayList<>();
+    private final static int TYPE_ITEM = 0;
+    private final static int TYPE_FOOTER = 1;
+
+    List<ItemReposDomain> reposList = new ArrayList<>();
 
     public ReposRecyclerAdapter(List<ItemReposDomain> reposList) {
         Log.d(TAG, "ReposRecyclerAdapter() called with: reposList = [" + reposList + "]");
@@ -30,29 +33,46 @@ public class ReposRecyclerAdapter extends RecyclerView.Adapter<ReposRecyclerAdap
     }
 
     @Override
-    public ReposViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_repos, parent, false);
-        Log.d(TAG, "onCreateViewHolder() called with: parent = [" + parent + "], viewType = [" + viewType + "]");
-        return new ReposViewHolder(view);
+    public int getItemViewType(int position) {
+        if (position == getItemCount()-1) {
+            return TYPE_FOOTER;
+        }
+        return TYPE_ITEM;
     }
 
     @Override
-    public void onBindViewHolder(ReposViewHolder holder, int position) {
-        Log.d(TAG, "onBindViewHolder() called with: holder = [" + holder + "], position = [" + position + "]");
-        holder.bindTo(reposList.get(position));
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view;
+        if (viewType == TYPE_ITEM) {
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_repos, parent, false);
+            return new ReposViewHolder(view);
+        } else {
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_footer, parent, false);
+            return new FooterViewHolder(view);
+        }
+
+    }
+
+    @Override
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        if (holder instanceof ReposViewHolder) {
+            ReposViewHolder holderItem = (ReposViewHolder) holder;
+            holderItem.bindTo(reposList.get(position));
+        }
     }
 
     @Override
     public int getItemCount() {
-        Log.d(TAG, "getItemCount() called " + reposList.size());
-        return reposList.size();
+        int itemCount = reposList.size();
+
+        //footer
+        itemCount++;
+
+        return itemCount;
     }
 
     public void setList(List<ItemReposDomain> list) {
-        Log.d(TAG, "setList() called with: reposList = [" + list.size() + "]");
         reposList.addAll(list);
-        Log.d(TAG, "setList() returned: ok");
         notifyDataSetChanged();
 
 //        notifyItemInserted(this.reposList.size());
@@ -73,6 +93,12 @@ public class ReposRecyclerAdapter extends RecyclerView.Adapter<ReposRecyclerAdap
         void bindTo(ItemReposDomain reposItem) {
             idInDatabase.setText(String.valueOf(getAdapterPosition()));
             idRepos.setText(String.valueOf(reposItem.getIdRepos()));
+        }
+    }
+
+    static class FooterViewHolder extends RecyclerView.ViewHolder {
+        public FooterViewHolder(View itemView) {
+            super(itemView);
         }
     }
 }
