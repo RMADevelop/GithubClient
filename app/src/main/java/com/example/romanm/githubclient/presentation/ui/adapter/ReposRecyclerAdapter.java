@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.example.romanm.githubclient.R;
 import com.example.romanm.githubclient.data.local.model.ReposLocal;
 import com.example.romanm.githubclient.domain.models.ItemReposDomain;
+import com.example.romanm.githubclient.presentation.mvp.model.ReposPresentation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,9 +28,9 @@ public class ReposRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     private ReposRecyclerListener listener;
 
-    List<ItemReposDomain> reposList = new ArrayList<>();
+    List<ReposPresentation> reposList = new ArrayList<>();
 
-    public ReposRecyclerAdapter(List<ItemReposDomain> reposList, ReposRecyclerListener listener) {
+    public ReposRecyclerAdapter(List<ReposPresentation> reposList, ReposRecyclerListener listener) {
         this.listener = listener;
         this.reposList.addAll(reposList);
     }
@@ -77,7 +78,7 @@ public class ReposRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.View
         return itemCount;
     }
 
-    public void setList(List<ItemReposDomain> list) {
+    public void setList(List<ReposPresentation> list) {
         reposList.addAll(list);
         notifyDataSetChanged();
 
@@ -96,9 +97,9 @@ public class ReposRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.View
             idRepos = itemView.findViewById(R.id.id_repos);
         }
 
-        void bindTo(ItemReposDomain reposItem) {
+        void bindTo(ReposPresentation reposItem) {
             idInDatabase.setText(String.valueOf(getAdapterPosition()));
-            idRepos.setText(String.valueOf(reposItem.getIdRepos()));
+            idRepos.setText(String.valueOf(reposItem.getId()));
         }
     }
 

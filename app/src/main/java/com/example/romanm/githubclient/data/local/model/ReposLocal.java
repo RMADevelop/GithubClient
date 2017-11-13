@@ -16,6 +16,8 @@ public class ReposLocal {
 
     public String name;
 
+    public ReposLocal() {
+    }
 
     public ReposLocal(int idRepos, String name) {
         this.idRepos = idRepos;

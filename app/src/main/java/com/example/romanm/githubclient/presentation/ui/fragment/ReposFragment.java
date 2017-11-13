@@ -20,6 +20,7 @@ import com.example.romanm.githubclient.App;
 import com.example.romanm.githubclient.R;
 import com.example.romanm.githubclient.data.local.model.ReposLocal;
 import com.example.romanm.githubclient.domain.models.ItemReposDomain;
+import com.example.romanm.githubclient.presentation.mvp.model.ReposPresentation;
 import com.example.romanm.githubclient.presentation.mvp.presenter.ReposPresenterImpl;
 import com.example.romanm.githubclient.presentation.mvp.view.ReposListView;
 import com.example.romanm.githubclient.presentation.ui.adapter.ReposRecyclerAdapter;
@@ -105,7 +106,7 @@ public class ReposFragment extends MvpAppCompatFragment implements ReposListView
     }
 
     @Override
-    public void addItemsInAdapter(List<ItemReposDomain> reposList) {
+    public void addItemsInAdapter(List<ReposPresentation> reposList) {
         Log.d(TAG, "addItemsInAdapter() called with: reposList = [" + reposList + "]");
         adapter.setList(reposList);
     }
